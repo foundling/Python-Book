@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "chapters/chapter_base.html" %}
 {% block content %}
 {% filter markdown %}
 # For Loops
