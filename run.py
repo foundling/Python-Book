@@ -9,7 +9,8 @@ def index():
 @app.route('/ch/<id>')
 def chapter(id):
     template = ''.join(['chapter_', id, '.md']);  
-    return render_template(template)
+    chapter_path = 'chapters/' + template
+    return render_template(chapter_path)
 
 Misaka(app)
 app.run(debug=True)
