@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block content %}
 {% filter markdown %}
+{% block content %}
 # For Loops
 
 #### Terminology
@@ -23,14 +23,18 @@ FOR LOOP:
 
     a for loop example:
 
-    nums = [1,2,3,4]
-    for n in nums:
-        print n
+````python
+
+nums = [1,2,3,4]
+for n in nums:
+print n
+
+````
 
     another for loop example:
 
     name = 'bob'
     for l in name:
         print l
-{% endfilter %}
 {% endblock %}
+{% endfilter %}
