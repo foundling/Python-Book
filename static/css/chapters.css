@@ -18,3 +18,32 @@ pre code {
 }
 
 
+footer {
+    position: fixed;
+    height:  45px;
+    line-height:  45px;
+    margin: 0 auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0% 5%;
+    background: whitesmoke;
+}
+
+footer a {
+    text-decoration: none;
+    color: rgb(40,40,40);
+    padding: 2px 5px 5px 5px;
+}
+footer a:hover {
+  background: lightgray;
+}
+
+.home {
+  margin-right: 30px;
+}
+
+.next-prev {
+  width: 70%;
+}
+

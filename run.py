@@ -5,6 +5,8 @@ from flask.ext.misaka import Misaka
 
 chapters = [
     'introduction',
+    'iterables',
+    'terminology'
 ]
 
 app = Flask(__name__)
@@ -21,9 +23,20 @@ def chapter(id):
     chapter_title = chapters[id] + '.md'  
     chapter_path = 'templates/chapters/' + chapter_title
 
+    links = {
+        'next': {
+          'id'   : (id + 1) % len(chapters),
+          'name' : chapters[(id + 1) % len(chapters)]
+        },
+        'prev': {
+          'id'   : (id - 1) % len(chapters),
+          'name' : chapters[(id - 1) % len(chapters)]
+        }
+    } 
+
     with open(chapter_path) as fh:
         content = fh.read()
-        return render_template('chapters/chapter.html',content=content)
+        return render_template('chapters/chapter.html',content=content,links=links)
 
 Misaka(app)
 app.run(debug=True)
