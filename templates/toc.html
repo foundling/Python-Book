@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+
+{% block styles %}
+  {% include "styles/main.html" %}
+{% endblock %}
+
 {% block toc %}
 <h1>Table of Contents</h1>
 <ul>  
@@ -5,4 +11,8 @@
        <a href="/ch/{{num}}"><li>Chapter {{num}}</li></a>
     {% endfor %}
 </ul>
+{% endblock %}
+
+{% block scripts %}
+  {% include "scripts/main.html" %}
 {% endblock %}

@@ -1,4 +1,9 @@
 {% extends "chapters/chapter_base.html" %}
+
+{% block styles %}
+  {% include "styles/chapter_styles.html" %}
+{% endblock %}
+
 {% block content %}
 {% filter markdown %}
 # For Loops
@@ -33,4 +38,12 @@ another for loop example:
     for l in name:
         print l
 {% endfilter %}
+{% endblock %}
+
+{% block footer %}
+  <a href="/">home</a>
+{% endblock %}
+
+{% block scripts %}
+  {% include "scripts/chapter_scripts.html" %}
 {% endblock %}

@@ -1,6 +1,13 @@
+body {
+    font-family: Verdana, Arial, Helvetica;
+    margin: 40px auto;
+    width: 80%;
+}
+
 terminology {
     background: lightsalmon;
 }
+
 pre code {
     font-family: monospace;
     background: lightblue;
@@ -8,12 +15,6 @@ pre code {
     display: inline-block;
     margin-left: 10px;
     padding: 20px;
-}
-
-body {
-    font-family: Baskerville, Arial, Helvetica;
-    margin: 40px auto;
-    width: 80%;
 }
 
 
