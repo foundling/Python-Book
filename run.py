@@ -5,9 +5,6 @@ from flask.ext.misaka import Misaka
 
 chapters = [
     'introduction',
-    'printing_values',
-    'first_ data_ types',
-    'iteration_basics',
 ]
 
 app = Flask(__name__)
@@ -21,10 +18,12 @@ def chapter(id):
     if id >= len(chapters) or id < 0:
         return redirect('/')
 
-    title = chapters[id]
-    template_file = ''.join([title,'.md']);  
-    chapter_path = 'chapters/' + template_file
-    return render_template(chapter_path)
+    chapter_title = chapters[id] + '.md'  
+    chapter_path = 'templates/chapters/' + chapter_title
+
+    with open(chapter_path) as fh:
+        content = fh.read()
+        return render_template('chapters/chapter.html',content=content)
 
 Misaka(app)
 app.run(debug=True)

@@ -1,0 +1,17 @@
+{% extends "chapters/chapter_base.html" %}
+
+{% block styles %}
+  {% include "styles/chapter_styles.html" %}
+{% endblock %}
+
+{% block content %}
+  {{content | markdown}}
+{% endblock %}
+
+{% block footer %}
+  <a href="/">home</a>
+{% endblock %}
+
+{% block scripts %}
+  {% include "scripts/chapter_scripts.html" %}
+{% endblock %}
