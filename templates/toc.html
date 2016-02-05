@@ -1,0 +1,8 @@
+{% block toc %}
+<h1>Table of Contents</h1>
+<ul>  
+    {% for num in range(1,5) %}
+       <a href="/ch/{{num}}"><li>Chapter {{num}}</li></a>
+    {% endfor %}
+</ul>
+{% endblock %}
