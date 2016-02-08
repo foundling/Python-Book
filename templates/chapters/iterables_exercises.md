@@ -21,14 +21,18 @@ Hint: you will find the for loop construct useful here, as well as using some da
 
 Create a new list where each username is capitalized. Print the list.
 
-## solution:
+## example approach:
+
     new_usernames = []
     for name in usernames:
         capitalized_name = name.upper()
         new_usernames.append(capitalized_name)
     print new_usernames
-    
-    
+
+## example solution:
+
+    ['REDSOXFAN9000', 'DJCARL', 'DONUTMAN', '?UESTLOVE', 'BBGUN', 'RJD2C3PO', 'VIDEOGAMEZ', 'LILLY99']
+
 
 #### Ex. 1 - Six or Shorter
 
