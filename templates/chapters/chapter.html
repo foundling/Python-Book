@@ -2,10 +2,25 @@
 
 {% block styles %}
   {% include "styles/chapter_styles.html" %}
+  {% include "styles/exercises_styles.html" %}
 {% endblock %}
 
 {% block content %}
+
+  <div class="content">
   {{content | markdown}}
+  </div>
+
+{% endblock %}
+
+{% block exercises %}
+  {% if exercises %}
+  <div class="exercises">
+    <h1>Exercises</h1>
+    {{exercises | markdown}}
+  </div>
+  {% endif %}
+
 {% endblock %}
 
 {% block footer %}

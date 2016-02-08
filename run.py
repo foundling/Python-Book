@@ -20,8 +20,8 @@ def chapter(id):
     if id >= len(chapters) or id < 0:
         return redirect('/')
 
-    chapter_title = chapters[id] + '.md'  
-    chapter_path = 'templates/chapters/' + chapter_title
+    chapter_path = 'templates/chapters/' + chapters[id] + '.md' 
+    exercises_path = 'templates/chapters/' + chapters[id] + '_exercises' + '.md'
 
     links = {
         'next': {
@@ -34,9 +34,12 @@ def chapter(id):
         }
     } 
 
-    with open(chapter_path) as fh:
-        content = fh.read()
-        return render_template('chapters/chapter.html',content=content,links=links)
+    content = open(chapter_path).read() if os.path.exists(chapter_path) else None
+    exercises = open(exercises_path).read() if os.path.exists(exercises_path) else None 
+
+    print exercises
+
+    return render_template('chapters/chapter.html', content=content, exercises=exercises, links=links)
 
 Misaka(app)
 app.run(debug=True)
