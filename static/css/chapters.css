@@ -12,6 +12,9 @@ pre {
   overflow-x: auto;
   width: 100%;
 }
+code.language-python {
+    width: calc(100% - 60px);
+}
 pre code {
     font-family: monospace;
     background: #E8E8E8;
