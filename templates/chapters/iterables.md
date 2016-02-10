@@ -16,10 +16,21 @@ Format:
 
 Actual Code: 
 
-    for <iterator> in <iterable>:
-        # code involving <iterator>, the value
+    for temp_var in list_of_names:
+        print 'name:' + temp_var code 
 
 Calling it an 'iterable' indicates that you can use it in a particular *way*, so it is a bit more abstract because it doesn't express what it is, but how it behaves.
+
+# A smidge of 'history'
+
+The iterable is an abstraction of the idea of an array, which in C, for example, corresponds to a contiguous block memoryspace in the runtime environment. This makes sense, why store `abcdefg` as `a` in one place, `b` in another, and `c` in a third when you can store it as it is and read each byte in a row. Having like data in the same physical location is an efficiency measure. This is where the 0-index notation comes from: the index is a measure of offsets from the beginning of the structure.  Since the array is an aggregation of values under the guise of one name, we get the first item by travelling 0 offsets from the beginning of the structure. 
+
+But an array was often implemented in such a way that it could only contain elements of similiar types. Python's analog is the `list` data type. 
+
+A list looks like this:
+
+    scores = [89,104,71,88,91,68]
+
 
 A sequence is a collection of values that exist in a particular order, where the values are not required to be unique. 
 
