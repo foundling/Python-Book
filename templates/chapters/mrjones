@@ -1,0 +1,6 @@
+a = 'Mr. Jones'
+print a[4].upper()
+print a[5].upper()
+print a[6].upper()
+print a[7].upper()
+print a[8].upper()

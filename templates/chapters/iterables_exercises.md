@@ -15,7 +15,7 @@ Here's the list:
         'lilly99'
     ]
 
-Hint: you will find the for loop construct useful here, as well as using some data type to hold intermediate values during the loop. 
+Hint: you will find the `for` loop useful here, as well as using some data type to hold intermediate values during the loop. 
 
 #### Ex. 0 - Upper Case 
 
