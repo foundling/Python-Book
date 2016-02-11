@@ -1,4 +1,5 @@
 #!/bin/bash
 
 source env/bin/activate
-python run.py
+python run.py &
+/usr/bin/open -a "/Applications/Google Chrome.app" 'http://localhost:5000/'
