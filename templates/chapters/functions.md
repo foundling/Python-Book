@@ -2,45 +2,42 @@
 
 ### What is a function?
 
-There are special ways to create new things in a program.  One way is to use the `=` operator in  the example `a = 5`, which says 'when i reference `a`, give me 5'. Another is to use the `def` keyword, which defines a function.  But what exactly *is* a function? If we recall from mathematics, a function takes some input and conceptually transforms it, yielding some output. The whole thing is a bit mystical to think about.  Here's the mathematical form: 
+There are special ways to create new things in a program.  One way is to use the `=` operator in  the example `a = 5`, which binds the value `5` to the name `a`. In other words, you're telling Python: 'when I write `a`, I expect to get 5'. Another way to create something new is to use the `def` keyword, which defines a function.  
+
+    def my_function():
+        #code goes here
+
+But what exactly *is* a function? If you recall from mathematics, a function takes some input and transforms it, yielding some potentially new value. The whole thing is a bit mystical to think about.  Here's a mathematical function: 
 
     f(x) -> x^2
 
-The thing I want to draw attention to is the fact that `x` is sent into the function, but the expression to the right of the arrow describes what is sent out.
+The things I want to draw attention to are practical: some `x` is sent into the function. The squared value of `x` is calculated and then sent out.
 
-The closest analog in Python to the equation above would be this:
+`x` is the **input**.
+
+`x^2`, when evaluated with some numerical value of `x`, is the **output**.
+
+Here's an analog in Python:
 
     def f(x):
         return x*x
 
-`x` is the **input**.
-
-`x^2` is the **output**.
 
 However, you aren't required to have either inputs or return values.  You could write something like:
 
-    def f():
-        # open a file and read its contents into a string called content
-        content = open('file.txt').read() 
-        # print that string
-        print content
+    def get_name():
+        name = raw_input("Enter your name: ")
+        print name
 
-Here, there are no arguments and there is no return value.
+Some functions are useful for transforming input into output and returning it, like the function that takes in `x` and returns `x` squared. Others, like `get_name` are useful for interacting with parts of the system that are defined outside of the function. It is also possible for a function to do both things at once. But one drawback of functions that use data defined in remote locations is that they are less portable, harder to read and harder to be confident about. But this fact is inescapable to some degree. 
 
-One thing to take away is that the input value `x` is being turned into `x^2`.  This is a `return` value.  You need to use the reserved word `return` in Python or the function will return a value you don't want. 
+The `raw_input` function, as I just alluded to, is not defined inside of `get_name`, but somewhere else. Where is that? They are defined in the **runtime** environment. When does that happen? Before your program is executed (or if you're using the interpreter, before you're given a prompt to start typing Python code), a bunch of names and values are loaded into the program that you can use from anywhere in the program. Some of those names refer to `built-in` functions. 
 
-But not every function needs to return anything. If the 
+Let's try out a common `built-in`:
 
-So the equation says 'f is a function that when given a value yields that value squared'.
+    len()
 
-
-### Functions in Action
-
-When you start up a Python interpreter or run a Python script, you are invoking the Python runtime environment (see the Runtime Environment chapter), which among other things gives you access to a bunch of highly useful pre-written in functions, referred to as `built-in`s. You can use a `built-in` just by writing out its name and appending `()` to the end. Here's an example: 
-
-    print len()
-
-This didn't work. Did you get this error message?
+Ah ha! This didn't work. Did you get this error message?
 
     ---------------------------------------------------------------------------
     TypeError                                 Traceback (most recent call last)
@@ -50,15 +47,83 @@ This didn't work. Did you get this error message?
     TypeError: len() takes exactly one argument (0 given)
 
 
-That's right, 'len() takes exactly one argument(0 given)'.  If we look at our code again,
+Note the `TypeError`: 'len() takes exactly one argument(0 given)'.  What is an argument? An argument is a value written in between the parentheses of a function call.  Let's try again:
 
-    print len()
+    len('test')
 
-An argument is some value that you give a function and ask it to use in a computation. It fits between the parentheses in `len()`. 
+If you run this in the interpreter, it will print back 4. But if you run a script with just this, it will not print anything. The reason is that the interpreter's behavior is more for the purpose of interactive programming, so it is efficient to have the values printed when they are entered and evaluted. But a Python file won't print out the value by default. You should use `print` to do that.  
 
-we need to pass the function an *argument*.  After all, we're calling a function `len`, but we didn't say *what* to get the length of.
+    print len('test')
+
+An argument is some value that you pass to a function when you call it.
+
+Calling a function is done by writing the name, followed by a set of parentheses that can contain from 0 to many argument names separated by commas:
+
+    def f(a,b,c):
+        # code goes here 
+
+A note on arguments: they look like variable names, but since they are in the definition, they merely describe the form of the code to be run when the function is actually called, i.e., they are incomplete, value-wise, until you call the function `f` with three values.  At definition time, you are saying, 'if I call `f` with the proper number of arguments, I can access the first as `a`, the second as `b` and the third as `c` inside of `f`. 
+
+So with `len`, we got that error because we needed to pass it a single *argument*.  If we passed it two, it would give us a similar error. Some languages might ignore any unused arguments to the function, but Python throws a `TypeError`.
+
+### Functions inside of Functions ?!?!?!
+
+Yes, that's right. Here's an example:
+
+    def f():
+        print 'I am function f'
+        def g():
+            print 'I am function g.'
+
+    f()
+
+Now for a quiz: What does the last line, `f()`, print?
+
+<input type="radio" name="q1" value="first" />
+<pre>I am function 'f'</pre>
+<input type="radio" name="q1" value="second" />
+<pre>I am function'f'<br>I am function 'g'</pre>
 
 
+When you call f, you define `g`. But `g` isn't called, so `f()` just prints "I am function 'f'".
+
+You could also do this:
+
+    def f():
+        print "I am function f"
+
+    def g(some_func):
+        print some_func()
+    
+    g()        
+
+How many functions are called when this code runs?
+
+<input type="radio" name="q1" value="1" />
+<label>1</label>
+<input type="radio" name="q1" value="2" />
+<label>2</label>
+<input type="radio" name="q1" value="3" />
+<label>3</label>
+
+This one is intentionally tricky, but what do you think `b(a)` prints?
+
+def a(some_func):
+    print 'I am a.'    
+    some_func(b)
+
+def b(some_other_func):
+    some_other_func(a)
+
+b(a)
+
+If this confuses you, that only means that you are paying attention.  This is what is going on:
+
+b is called on the value a, which is a function.
+inside b, a (now called 'some_other_func') is called on a.
+a prints 'i am a.' and then calls some_func (which is a) on the value b, a function.
+
+b then calls ....
 
 ### Why use them?
 
@@ -93,7 +158,7 @@ Example:
 
 ### Some Basic Terminology
 
-- You **call** a function in order use the function. A function call includes a variable name and a set of `()` at the end. 
+- You **call** a function in order to run the code contained inside of it. A function call includes a variable name and a set of `()` at the end. 
 - A function can also accept **arguments** which are one or more some comma-separated names in inserted between the parentheses. These make values outside the function accessible to the functions inside.
 - You define a function when you want to take some code and make it reusable
 

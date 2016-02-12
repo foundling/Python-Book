@@ -21,7 +21,7 @@ An **iterable** is a type of object in Python that lets you step through a seque
     letters = ['a','b','c'] 
 
 
-Iterating through it will give you those values, `'A'`, `'B'`, `'C'`, one at a time. The way it works is you pick some mechanism for looping through things (for example, a `for` loop) as well as a single name for your iterator value. The code you specify runs for as many items are in the collection. Each time your code runs, it runs on a different element in the sequence and so the name you picked now refers to that next item. When there are no more items, the `for` loop knows internally to stop. 
+Iterating through it will give you those values, `'a'`, `'b'`, `'c'`, one at a time. The way it works is you pick some mechanism for looping through things (for example, a `for` loop) as well as a single name for your iterator value. The code you specify runs for as many items are in the collection. Each time your code runs, it runs on a different element in the sequence and so the name you picked now refers to that next item. When there are no more items, the `for` loop knows internally to stop. 
 
 Format: 
 
