@@ -16,6 +16,7 @@ pre {
 
 code.language-python {
     width: calc(100% - 60px);
+    overflow-x: auto;
 }
 pre code {
     font-family: monospace;
