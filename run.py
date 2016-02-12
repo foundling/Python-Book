@@ -6,6 +6,7 @@ from flask.ext.misaka import Misaka
 chapters = [
     'introduction',
     'iterables',
+    'functions',
     'terminology'
 ]
 
