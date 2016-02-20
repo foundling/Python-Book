@@ -2,38 +2,58 @@
 
 ### What is a function?
 
-There are special ways to create new things in a program.  One way is to use the `=` operator in  the example `a = 5`, which binds the value `5` to the name `a`. In other words, you're telling Python: 'when I write `a`, I expect to get 5'. Another way to create something new is to use the `def` keyword, which defines a function.  
+There are special ways to create new things in a program.  One way is to use the `=` operator. Another way is the `def` keyword, which defines a function.  
 
     def my_function():
         #code goes here
 
-But what exactly *is* a function? If you recall from mathematics, a function takes some input and transforms it, yielding some potentially new value. The whole thing is a bit mystical to think about.  Here's a mathematical function: 
+But what exactly *is* a function? If you recall from mathematics, a function expresses a relationship between some range of inputs and their outputs. Here is a mathematical function: 
 
-    f(x) -> x^2
+    f(x) -> x^2 | x e R
 
-The things I want to draw attention to are practical: some `x` is sent into the function. The squared value of `x` is calculated and then sent out.
+I would read this from left to right to mean: 'Here is some function `f(x)` such that when given a particular input value, outputs that input times itself.  The `| x e R` just stipulates 'for all Real numbers', or as they say, '... such that x is a member of the set of all Real numbers'.
 
-`x` is the **input**.
-
-`x^2`, when evaluated with some numerical value of `x`, is the **output**.
-
-Here's an analog in Python:
+Here's an analogue in Python:
 
     def f(x):
         return x*x
 
+In Python, we use `def` to indicate that we are defining a function.  We name the function and provide a set of parentheses containing any arguments to it. Arguments aren't required, but the program will halt if it expects an argument when you've called it without one. This is 
 
-However, you aren't required to have either inputs or return values.  You could write something like:
+The code contained in the function is always indented a standard number of spaces to the right (use 4 spaces) relative to the block of code you're in, which is relative to the function definition. 
+
+
+But you can also do *this* in Python:
+
+    def f():
+        ''' No args. No return value. No nothing '''
+
+You might conceivably write something like this:
 
     def get_name():
         name = raw_input("Enter your name: ")
         print name
 
-Some functions are useful for transforming input into output and returning it, like the function that takes in `x` and returns `x` squared. Others, like `get_name` are useful for interacting with parts of the system that are defined outside of the function. It is also possible for a function to do both things at once. But one drawback of functions that use data defined in remote locations is that they are less portable, harder to read and harder to be confident about. But this fact is inescapable to some degree. 
+but this isn't very useful for other functions, and that's the difference between a return value and a function without one.  A return value can be used by another function, but merely printing that value to the screen does't communicate anything to your program. 
 
-The `raw_input` function, as I just alluded to, is not defined inside of `get_name`, but somewhere else. Where is that? They are defined in the **runtime** environment. When does that happen? Before your program is executed (or if you're using the interpreter, before you're given a prompt to start typing Python code), a bunch of names and values are loaded into the program that you can use from anywhere in the program. Some of those names refer to `built-in` functions. 
+    def get_name():
+        name = raw_input("Enter your name: ")
+        return name
 
-Let's try out a common `built-in`:
+This is better because another function can use its return value.
+
+    len(get_name())
+
+Some functions are useful for transforming input into output and returning it, like the function that takes in `x` and returns `x` squared. Others, like `get_name` are useful for interacting with parts of the system that are defined outside of a given function but referenced inside of it. A function like this doesn't provide a return value, so here the analogy to math breaks down totally. It is also possible for a function with both input values and a return value to change things defined elsewhere. Major drawbacks of functions that use data defined in remote locations are that they are less portable, they are more time consuming to read and harder to be sure about.
+
+
+#### Built-ins
+
+Above, I used the `raw_input` function inside of `get_name` but it was defined somewhere else. This is would be the sort of mysteriousness that I just referred to, but a `built-in`, such as `raw_input`, is part of the Python standard library, a collection of essential and useful tools for general use. We need to access these somehow.  These are bindings between names and values in the global namespace. We'll talk more about namespacing, but for now you can consider it to be similar to bookkeeping. 
+
+Where does the standard library come from? It is loaded into the **runtime** environment before your program is executed. Or if you're using the interpreter, before you're given a prompt to start typing Python code), and some initialization, including the loading of a set of `built-in` modules like `len`, `raw_input` and `max`. Built-ins are loaded into the program and you can use them anywhere. 
+
+Let's try out `len`:
 
     len()
 
@@ -47,11 +67,13 @@ Ah ha! This didn't work. Did you get this error message?
     TypeError: len() takes exactly one argument (0 given)
 
 
-Note the `TypeError`: 'len() takes exactly one argument(0 given)'.  What is an argument? An argument is a value written in between the parentheses of a function call.  Let's try again:
+It pays to learn to read these things.  I Always gravitate toward the line number and the type that TypeError specifies. It pays to learn type errors (you should see a lot of them). Here, note the `TypeError`: 'len() takes exactly one argument(0 given)'.  Well, what is an argument? It's the value in between the parentheses.  Let's try again:
 
     len('test')
 
-If you run this in the interpreter, it will print back 4. But if you run a script with just this, it will not print anything. The reason is that the interpreter's behavior is more for the purpose of interactive programming, so it is efficient to have the values printed when they are entered and evaluted. But a Python file won't print out the value by default. You should use `print` to do that.  
+There we go, a value back.  It prints print back 4. But if you run it as a script, it will not print anything. The reason is this: the interpreter evaluates code whenever you hit enter.  So it both promotes line by line experimentation and makes doing otherwise very difficult. Values are printed on evaluation because it saves you from having to constantly type 'print x'.  It's a free print statement everytime you press enter. Also, if you aren't sure what evaluation means, open up a Python terminal and try to find the smallest symbol you can type and not get an error after hitting Enter.  Any time the interpreter prints a value to you, that's evaluation. 
+
+Anyway, a Python file won't print out the value when you're running a Python program. Yo need to use `print` to do that.  
 
     print len('test')
 
@@ -109,21 +131,21 @@ How many functions are called when this code runs?
 This one is intentionally tricky, but what do you think `b(a)` prints?
 
 def a(some_func):
-    print 'I am a.'    
+    print 'A, here!'    
     some_func(b)
 
-def b(some_other_func):
-    some_other_func(a)
+def b(some_func):
+    some_func(a)
 
 b(a)
 
-If this confuses you, that only means that you are paying attention.  This is what is going on:
 
-b is called on the value a, which is a function.
-inside b, a (now called 'some_other_func') is called on a.
-a prints 'i am a.' and then calls some_func (which is a) on the value b, a function.
+Of course, programming isn't about solving the problem by going first to your keyboard.  Anything important *requires* time away from a computer.  It's a decision.  You want to be able to consider the essential things without distraction.  
 
-b then calls ....
+You can minimize distraction by 'stubbing' out functions.  Here is an example:
+
+    def newtonian_square_root(x):
+        pass
 
 ### Why use them?
 
