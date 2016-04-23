@@ -1,8 +1,15 @@
-# Sequences, Iterables and the `for` loop
+# Sequences, Iterables, For Loops
 
-A sequence is just a list of things in a particular order. Lots of things are sequences: words, a dance routine, a musical passage, a grocery list.
+A sequence is just a list of things in a particular order. Lots of things are sequences:  
 
-Here are some examples of iterables: 
+<ul class="normal-list">
+<li>a word - a sequence of letters</li>
+<li>a sentence  - a sequence of words or a sequence of letters
+<li>a musical performance - a sequence of notes or combinations of notes</li>
+<li> a grocery list - a sequence of things your kitchen is missing</li>
+</ul>
+
+Here are some examples of sequences in Python by type: 
 
     # a string
     'Mr. Jones'
@@ -13,52 +20,69 @@ Here are some examples of iterables:
     # a tuple
     (4,3,2,1)
 
-    # a list of tuples
-    [(4,1), (3,0), (2,0), (0,1)]
+    # a list of lists
+    [[4,3,2,1],[4,3,2,1],[4,3,2,1]]
+
+    # a tuple of tuples
+    ((4,1), (3,0), (2,0), (0,1))
  
-An **iterable** is a type of object in Python that lets you step through a sequence. Say your iterable is:
+
+### The Iterable
+
+An **iterable** is a Python object with a special interface designed to let you step through its underlying data in an item-by-item fashion. The mechanics that make this behavior possible aren't obvious, but they are important to be mindful of and we will cover them in greater detail in a later chapter. 
+
+Say you create an iterable called `letters`:
 
     letters = ['a','b','c'] 
 
 
-Iterating through it will give you those values, `'a'`, `'b'`, `'c'`, one at a time. The way it works is you pick some mechanism for looping through things (for example, a `for` loop) as well as a single name for your iterator value. The code you specify runs for as many items are in the collection. Each time your code runs, it runs on a different element in the sequence and so the name you picked now refers to that next item. When there are no more items, the `for` loop knows internally to stop. 
+Iterating through `letters` will give you the values, `'a'`, `'b'`, `'c'`, one at a time. 
 
-Format: 
+How exactly can we iterate through `letters`? We need to pick a control structure, which is to say we need to pick one of the Python mechanisms that lets us repeat some bit of code while some condition is true. One appropriate control structure for stepping through `letters` is a `for` loop.  
 
-    for <iterator> in <iterable>:
-        # code involving <iterator>, the value
+### The `for` Loop
 
-Actual Code: 
+The best way to get acquainted with the `for` loop is to pick a name to refer to each new value in the `letters` sequence. Lets call it `letter`. Then you decide what you want to do with that letter. When you put these together in the correct Python syntax, you can do something like this:
 
-    for temp_var in list_of_names:
-        print 'name:' + temp_var code 
+    for letter in letters:
+        print letter 
+    #a
+    #b
+    #c
 
-Calling it an 'iterable' indicates that you can use it in a particular *way*, so it is a bit more abstract because it doesn't express what it is, but how it behaves.
+Or even this:
 
-# Properties of Iterables
-TO DO
+    for letter in letters:
+        print '42' 
+    #42
+    #42
+    #42
 
-# A smidge of 'history'
+Each execution of the `for` has access to a new value in `letters` and so each new letter is accessible, whether you use it or not.  When there is no next item left, the `for` loop will stop. 
 
-The iterable is an abstraction of the idea of an array, which in C, for example, corresponds to a contiguous block memoryspace in the runtime environment. This makes sense, why store `abcdefg` as `a` in one place, `b` in another, and `c` in a third when you can store it as it is and read each byte in a row. Having like data in the same physical location is an efficiency measure. This is where the 0-index notation comes from: the index is a measure of offsets from the beginning of the structure.  Since the array is an aggregation of values under the guise of one name, we get the first item by travelling 0 offsets from the beginning of the structure. 
 
-But an array was often implemented in such a way that it could only contain elements of the same type. Python's analog is the `list` data type. In the `list`, you can put anything you want inside, regardless of type.  They kept the syntax, but changed the architecture. 
+### The Interface
 
-It could look like this:
-    
-    stuff = [True, 'xyz', 0, len]
+I said that an iterable has an interface that provides access to data in a certain way. I'll demonstrate that in the following way. Instead of a list, let's say you have a string called `letters`:
 
-Here, `True` is a Boolean ( true or false value), `xyz` is a string, `0` is an integer, and `len` is a built-in function that gives you the length of a sequence.
+    letters = 'abc'
 
-It might more commonly look like this:
+The code we wrote above will result in the exact same output if we run it on the string version of  `letters`:  
 
-    scores = [89,104,71,88,91,68]
+    for letter in letters:
+        print letter 
+    #a
+    #b
+    #c
 
-or this:
+And that is because an iterator is a contract that defines how the underlying data is treated. So whatever an object's underlying sequence is, if that object is an iterator, that data can be accessed through iteration.  
 
-    days = [True, True, True, True, True, True, True]
+Below, we are trying to iterate through an integer. We get a `TypeError` because we've tried to use a control structure that expects an iterable but we've given it the integer `number`. You can think of a `TypeError` as an error that results from the violation of a contract.
 
-One thing to note is that Python's method of iteration produces the *value* of the item as opposed to the value's position in the list. When it comes to the `for` loop, this is maybe surprising if you know other languages like C, Perl, JavaScript, Java, just to name a few, which are more index-focused. There is an idiomatic way to get the position of the item in the sequence, though, involving the function `enumerate` in `for` loop. For another time.
+    number = 5
+    for n in number:
+        print n
+    # TypeError: 'int' object is not iterable
 
 
 #### Indexing: getting a value in a sequence
