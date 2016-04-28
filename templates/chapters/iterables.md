@@ -29,20 +29,20 @@ Here are some examples of sequences in Python by type:
 
 ### The Iterable
 
-An **iterable** is a Python object with a special interface designed to let you step through its underlying data in an item-by-item fashion. The mechanics that make this behavior possible aren't obvious, but they are important to be mindful of and we will cover them in greater detail in a later chapter. 
+An **iterable** is a Python object with a special interface designed to let you step through its underlying data in an item-by-item fashion. The mechanics that make this behavior possible are somewhat hidden from plain sight, but they are important to be mindful of and we will cover them in greater detail in a later chapter. 
 
 Say you create an iterable called `letters`:
 
     letters = ['a','b','c'] 
 
 
-Iterating through `letters` will give you the values, `'a'`, `'b'`, `'c'`, one at a time. 
+`letters` is both a list and an iterable and this is because **lists are iterables**.    
 
-How exactly can we iterate through `letters`? We need to pick a control structure, which is to say we need to pick one of the Python mechanisms that lets us repeat some bit of code while some condition is true. One appropriate control structure for stepping through `letters` is a `for` loop.  
+Iterating through `letters` will give you the values, `'a'`, `'b'`, `'c'`, one at a time, but how can we do this? We need to pick a control structure, which is to say we need a Python looping mechanism. What we want is something that will repeat some bit of code while some condition is true. Let's try the `for` loop.  
 
 ### The `for` Loop
 
-The best way to get acquainted with the `for` loop is to pick a name to refer to each new value in the `letters` sequence. Lets call it `letter`. Then you decide what you want to do with that letter. When you put these together in the correct Python syntax, you can do something like this:
+The best way to get acquainted with the `for` loop is to pick a name to refer to each new value in the `letters` sequence. Lets call it `letter`, with no `s`. Then you decide what you want to do with that letter by putting your code in an indented block on the next line. When you put these together in the correct Python syntax, you can do something like this:
 
     for letter in letters:
         print letter 
@@ -52,18 +52,25 @@ The best way to get acquainted with the `for` loop is to pick a name to refer to
 
 Or even this:
 
+    letters = [
+        'Dear John, much time has passed since we last spoke ...',
+        'Dear Wendy, please find the enclosed photograph you requested ...',
+        'Hi Wayne, School is going good. Miss you ...'
+    ]
+
     for letter in letters:
-        print '42' 
-    #42
-    #42
-    #42
+        if letter == 'Dear john, much time has passed since we last spoke ...': 
+            print '42'
+    
+    # [ prints ] 
+    # Dear john, much time has passed since we last spoke ...': 
 
 Each execution of the `for` has access to a new value in `letters` and so each new letter is accessible, whether you use it or not.  When there is no next item left, the `for` loop will stop. 
 
 
 ### The Interface
 
-I said that an iterable has an interface that provides access to data in a certain way. I'll demonstrate that in the following way. Instead of a list, let's say you have a string called `letters`:
+I said that an iterable has an interface that provides access to data in a certain way. I'll expand on that a little further now. Instead of a list, let's say you have a string called `letters`:
 
     letters = 'abc'
 
@@ -75,7 +82,7 @@ The code we wrote above will result in the exact same output if we run it on the
     #b
     #c
 
-And that is because an iterator is a contract that defines how the underlying data is treated. So whatever an object's underlying sequence is, if that object is an iterator, that data can be accessed through iteration.  
+And that is because an iterator is an abstraction of a data type. In other words, an iterator has a contract that defines how the underlying data is treated. So if an object has the requisite properties, it meets the contract, so its data can be accessed through iteration. Things get cooler, as you can make your own custom objects that can have properties like iteration which the language supports directly.  
 
 Below, we are trying to iterate through an integer. We get a `TypeError` because we've tried to use a control structure that expects an iterable but we've given it the integer `number`. You can think of a `TypeError` as an error that results from the violation of a contract.
 
@@ -112,15 +119,19 @@ This will print each letter on a separate line. It works fine, but a more reason
 
     # and a single character is also an iterable/sequence
     letter = name[0]
-    letter[0]
+    print letter[0]
 
-Ready? 
+Strings have a funny property ... 
 
 
     # these print the same thing
+
     print name[0]
     print letter
 
+    # so do these:
+
+    print name[0]
     print name[0][0]
     print name[0][0][0]
     print name[0][0][0][0]
@@ -128,11 +139,7 @@ Ready?
     print name[0][0][0][0][0][0]
     print name[0][0][0][0][0][0][0]
     print name[0][0][0][0][0][0][0][0]
+    print name[0][0][0][0][0][0][0][0][0]
+    print name[0][0][0][0][0][0][0][0][0][0]
 
     ...
-
-So, a letter is infinitely indexible? It is.
-
-  letter = 'a'
-  while letter == 'a':
-      letter = letter[0] 
