@@ -8,7 +8,3 @@ def parse_section_headings(f):
 
     return targets
 
-if __name__ == '__main__':
-    headings = parse_section_headings('templates/chapters/iterables.md')
-    for h in headings:
-        print h
