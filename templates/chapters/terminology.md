@@ -92,25 +92,24 @@ def square_root(num):
     # code goes here
 ````
 
-What if you had to make sure that the `num` in `square` didn't conflict with the `num` in `square_root` by renaming the latter to `num2` or `other_num` ? That would be horrible and would quickly become a mess if you build a large project (a math library, for example). The LEGB rule for the scope mechanism makes things simpler: it looks within the function where `num` is used for a definition and if it finds one, that is the one that is evaluated. This way, you can have as many separate functions that use `num`s as you want and never have to worry about naming conflicts. The two functions above, thanks to scope, are perfectly okay. 
+What if you had to make sure that the `num` in `square` didn't conflict with the `num` in `square_root` by renaming the latter to `num2` or `other_num` ? That would quickly become problematic if you build anything but a small  project. The LEGB rule for the scope mechanism makes things simpler: it looks within the function where `num` is first declared. If found, that is the one that is evaluated. If not, it keeps looking in the outside function according to a set of rules, yielding the name or an error if the name is ultimately not in scope. This way, if you write two functions and they are more or less independent of one another, you will never have to worry about naming conflicts. The two functions above, thanks to scope, are perfectly okay. 
 
 Here's another example of Python's scoping mechanisms in action. 
 
-````python
 
-# define a function that prints a `num` and adds 10 to it
-def print_num():
-    num = 10 
+    # define a function that prints a `num` and adds 10 to it
+    def print_num():
+        num = 10 
+        print num
+
+    num = 4
+    print_num()
     print num
 
-num = 4
-print_num()
-print num
-````
 
-`print_num()` will output the value `10`. `print num` will output 4. Do you know why? Remember, what is important is where you see `num =` ..., or the location where num is defined.  This is how you can make sense of scope.
+
+`print_num()` will output the value `10`. `print num` will output 4. Do you know why? Remember, what is important is where you see `num =` ..., or the location where num is defined.  Determining which function this declaration is in will help you make sense of scope.
 
 In the case of `print_num()`, this is a function call so the program enters the `print_num` function and looks up the `num` there and finds `10`. In the case of `print num`, the num referred to is bound to the value 4 which is defined two lines above.
 
-If this makes complete sense to you, you might be wondering the difference between `print_num()` and `print num`.  For now, think of `print num` as something like `print(num)`. The important thing is the `num` that is passed to `print` has the value of `4` because it is defined within the outermost function.  
-
+You might be wondering the difference between `print_num()` and `print num`.  For now, think of `print num` as something like `print(num)`. The first is a user-defined function and the second is a statement. The important thing here is that both access the value `num` and print the same value. 

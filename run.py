@@ -2,13 +2,13 @@ import os
 
 from flask import Flask, render_template, redirect
 from flask.ext.misaka import Misaka
+from utils import parse_section_headings
 
 chapters = [
     'introduction',
     'iterables',
     'functions',
     'terminology',
-    'badcode'
 ]
 
 app = Flask(__name__)
@@ -36,12 +36,15 @@ def chapter(id):
         }
     } 
 
+
     content = open(chapter_path).read() if os.path.exists(chapter_path) else None
+    sections = parse_section_headings(chapter_path)
+
     exercises = open(exercises_path).read() if os.path.exists(exercises_path) else None 
 
     print exercises
 
-    return render_template('chapters/chapter.html', content=content, exercises=exercises, links=links)
+    return render_template('chapters/chapter.html', content=content, exercises=exercises, links=links, sections=sections)
 
 Misaka(app)
 app.run(debug=True,host='0.0.0.0', port=8080)
