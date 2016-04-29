@@ -1,10 +1,9 @@
 'use strict';
 
-var $document = $(document);
-var $window = $(window);
-var $headings = $('h3');
-var $menuElems = $('#chapter-menu').find('li');
-
+var $document   = $(document);
+var $window     = $(window);
+var $headings   = $('h3');
+var $menuElems  = $('#chapter-menu').find('li');
 
 var menu = $headings.map(function(index, el) {
     return {
@@ -32,13 +31,11 @@ var scrollHandler = function(ev) {
     /* moving up the page, moving the highlighted menu index toward 0 */
     if ( nextIndex < upperBound && $window.scrollTop() > menu[nextIndex].distanceFromTop ) {
         updateMenu(+1);
-        console.log(i);
     } 
 
     /* moving down the page, moving the highlighted menu index toward men.length */
     else if ( prevIndex > lowerBound && $window.scrollTop() < menu[prevIndex].distanceFromTop ) {
         updateMenu(-1);
-        console.log(i);
     }
 };
 
