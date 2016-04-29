@@ -1,16 +1,16 @@
 # Overview of Terminology 
 
-#### Names
+### Names
 
-#### Values
+### Values
 
-#### Declaration and Definition 
+### Declaration and Definition 
 
-#### Evaluation
+### Evaluation
 
-#### Data
+### Data
 
-#### Built-In Data Types
+### Built-In Data Types
 
 Representations of entities that you can use in your programs. Python makes the following data types available to you free of charge:
 
@@ -25,9 +25,9 @@ Representations of entities that you can use in your programs. Python makes the 
 
 Each of these have different purposes and demonstrate different behavior.
 
-#### Behavior
+### Behavior
 
-#### Number
+### Number
 
 + Integer
 
@@ -37,41 +37,41 @@ Each of these have different purposes and demonstrate different behavior.
 
 + Complex
 
-#### String
+### String
 
-#### Execution Order
+### Execution Order
 
 The Python interpreter executes a file from top to bottom and from left to right. 
 
-#### Execution Model
+### Execution Model
 
 This is a complex topic that you may want to do further research on if you decide you want to use Python seriously in the future.
 
-#### Boolean
+### Boolean
 
 A data type
 
-#### Function
+### Function
 
-#### Call Stack
+### Call Stack
 
 + Function Definition
 
 + Function Call
 
-#### Return Value
+### Return Value
 
-#### Module
+### Module
 
-#### Class
+### Class
 
-#### Object
+### Object
 
-#### Property
+### Property
 
-#### Method
+### Method
 
-#### Scope
+### Scope
 
 Assuming you've read the chapter about functions, we can talk about scope. A program can contain multiple uses of a name, but in different 'contexts'. The mechanism by which this is possible is called scope.  If you use a name somewhere in your program, the Python interpreter follows a method to determine what you meant (sometimes referred to as the LEGB rule), which figures out which value to use depending on where it is defined. It uses this process:
 

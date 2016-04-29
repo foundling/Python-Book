@@ -1,7 +1,9 @@
-<nav>
-<ul>
-    {% for section_name in sections %}
-    <li>{{section_name}}</li>
-    {% endfor %}
-</ul>
+{% if sections.subheadings %}
+<nav id="chapter-menu">
+    <ul>
+        {% for heading in sections.subheadings %}
+        <li>{{heading}}</li>
+        {% endfor %}
+    </ul>
 </nav>
+{% endif %}

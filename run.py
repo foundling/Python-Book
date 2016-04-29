@@ -38,7 +38,11 @@ def chapter(id):
 
 
     content = open(chapter_path).read() if os.path.exists(chapter_path) else None
-    sections = parse_section_headings(chapter_path)
+    sections =  parse_section_headings(chapter_path)
+    sections = { 
+            'title':            sections[0],
+            'subheadings':      sections[1:] 
+    }
 
     exercises = open(exercises_path).read() if os.path.exists(exercises_path) else None 
 
