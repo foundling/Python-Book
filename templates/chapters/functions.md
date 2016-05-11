@@ -2,25 +2,33 @@
 
 ### What is a function?
 
-There are special ways to create new things in a program.  One way is to use the `=` operator. Another way is the `def` keyword, which defines a function.  
+There are special ways to create new objects in a program.  One way is to assign a value to a name using the `=` operator. Another way is to use the `def` keyword. `def` defines a function and the argument(s) it takes.   
 
-    def my_function():
-        #code goes here
+    def my_function(arg1):
+        print('I am a function with one argument {}: '.format(arg1)) 
 
-But what exactly *is* a function? If you recall from mathematics, a function expresses a relationship between some range of inputs and their outputs. Here is a mathematical function: 
+But what exactly *is* a function? A heavy question. Let's not talk about that just yet. 
+
+How is a function used? Well, the code above is demonstrating part of that process, namely the definition state of a function. That happens first and once per unique function. But what follows is the function call.
+
+    my_function('Al was here!')
+
+If you recall from mathematics, a function expresses a relationship between some range of inputs and their outputs. Here is a mathematical function: 
 
     f(x) -> x^2 | x e R
 
-I would read this from left to right to mean: 'Here is some function `f(x)` such that when given a particular input value, outputs that input times itself.  The `| x e R` just stipulates 'for all Real numbers', or as they say, '... such that x is a member of the set of all Real numbers'.
+I would read this from left to right to mean: 'Here is some function `f` that when you give it `x`, e.g. `f(x)`, outputs `x` to the 2nd power. The `| x e R` just stipulates 'for all Real numbers', or as they say, '... such that x is a member of the set of all Real numbers'.
 
 Here's an analogue in Python:
 
     def f(x):
         return x*x
 
-In Python, we use `def` to indicate that we are defining a function.  We name the function and provide a set of parentheses containing any arguments to it. Arguments aren't required, but the program will halt if it expects an argument when you've called it without one. This is 
+There is an enormous difference between first mathematical function and the second more procedural function. You don't need to dig into the mathematical function to write a program.  However, the math determines the spectrum of data that function can take in the second function.
 
-The code contained in the function is always indented a standard number of spaces to the right (use 4 spaces) relative to the block of code you're in, which is relative to the function definition. 
+In Python, we use `def` to indicate that we are defining a function.  We name the function and provide a set of parentheses containing any arguments to it. Arguments aren't required, but the program will halt if it expects an argument when you've called it without one.  
+
+The code contained in the function is always indented by a baseline number of spaces to the right (4 spaces is an okay indentation size) of each of the function's lines of code in the source text.
 
 
 But you can also do *this* in Python:
@@ -28,28 +36,46 @@ But you can also do *this* in Python:
     def f():
         ''' No args. No return value. No nothing '''
 
+Or *this*:
+
+    def no_op(): pass
+
+### Return Values
+
+As they say, a function called is a value returned. So you can think of a function (... a *synchronous* function, at least) as a stand-in for its returned value when reading the source text.
+
 You might conceivably write something like this:
 
     def get_name():
         name = raw_input("Enter your name: ")
         print name
+        # something is missing here
 
-but this isn't very useful for other functions, and that's the difference between a return value and a function without one.  A return value can be used by another function, but merely printing that value to the screen does't communicate anything to your program. 
+This is fine, it prints some input provided by the user. But its missing something that would make it more useful.  A `return` value. 
 
     def get_name():
         name = raw_input("Enter your name: ")
+        # print(name)
         return name
 
 This is better because another function can use its return value.
 
-    len(get_name())
+    # get the length of a username.
+    # must 
+    username = len(get_name())
 
-Some functions are useful for transforming input into output and returning it, like the function that takes in `x` and returns `x` squared. Others, like `get_name` are useful for interacting with parts of the system that are defined outside of a given function but referenced inside of it. A function like this doesn't provide a return value, so here the analogy to math breaks down totally. It is also possible for a function with both input values and a return value to change things defined elsewhere. Major drawbacks of functions that use data defined in remote locations are that they are less portable, they are more time consuming to read and harder to be sure about.
+I'm going to introduce some complications to the story now.  We returned a value but didn't take one in as an argument. What happened to input and output?  So where did `raw_input` come from? Well, it's a binding to a lower level region of the system that can fetch the keyboard input. Objects like these are generally included in a language's standard library. And this function is not passed in as an argument because it is not necessary to.
+
+The fact is, we use a platform of tools to write programs, not merely a pure programming language.
+
+Some functions are useful for transforming input into output and returning it, like the function that takes in `x` and returns `x` squared. Others, like `get_name` are useful for interacting with parts of the system that are defined outside of a given function but referenced inside of it. A function like this doesn't provide a return value, so here the analogy to math on the data level breaks down totally. But it is practical.  It is instruction-based. It is also possible for a function with both input values and a return value to change things defined elsewhere. 
+
+Be aware that a major advantage to writing functions with only explicit arguments is that it is much easier to be certain about their results ( and to test that your conclusions are true ).
 
 
 #### Built-ins
 
-Above, I used the `raw_input` function inside of `get_name` but it was defined somewhere else. This is would be the sort of mysteriousness that I just referred to, but a `built-in`, such as `raw_input`, is part of the Python standard library, a collection of essential and useful tools for general use. We need to access these somehow.  These are bindings between names and values in the global namespace. We'll talk more about namespacing, but for now you can consider it to be similar to bookkeeping. 
+Above, I used the `raw_input` function inside of `get_name` but it was defined somewhere else. This is the sort of mysteriousness that I just referred to, but a `built-in`, such as `raw_input`, is part of the Python standard library, a collection of essential and useful tools for general use. We need to access these somehow.  These are bindings between names and values in the global namespace. We'll talk more about namespacing, but for now you can consider it to be similar to bookkeeping. 
 
 Where does the standard library come from? It is loaded into the **runtime** environment before your program is executed. Or if you're using the interpreter, before you're given a prompt to start typing Python code), and some initialization, including the loading of a set of `built-in` modules like `len`, `raw_input` and `max`. Built-ins are loaded into the program and you can use them anywhere. 
 
