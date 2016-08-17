@@ -19,7 +19,7 @@ Hint: you will find the `for` loop useful here, as well as using some data type 
 
 #### Ex. 0 - Upper Case 
 
-Create a new list where each username is capitalized. Print the list.
+Create a new list and put each username from the list `usernames` into it, but make sure each name is capitalized. 
 
 ## example approach:
 
@@ -31,12 +31,15 @@ Create a new list where each username is capitalized. Print the list.
 
 ## example solution:
 
-    ['REDSOXFAN9000', 'DJCARL', 'DONUTMAN', '?UESTLOVE', 'BBGUN', 'RJD2C3PO', 'VIDEOGAMEZ', 'LILLY99']
+    ['REDSOXFAN9000', 'DJCARL', 'DONUTGRL', '?UESTLOVE', 'BBGUN', 'RJD2C3PO', 'VIDEOGAMEZ', 'LILLY99']
 
 
 #### Ex. 1 - Six or Shorter
 
-Go through the items in usernames and pick out the usernames that are 6 or less characters long. Put them in a new list and print that list.
+Go through the items in usernames and pick out the usernames that are 6 or less characters long. Put them in a new list and print that list. 
+
+<input class="iterables_ex_1"/>
+<button type="submit">Submit</button>
 
 #### Ex. 2 - Even Number of Characters 
 
